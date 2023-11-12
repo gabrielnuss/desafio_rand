@@ -89,7 +89,7 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                   ),
                   TextField(
                     focusNode: senhaFocusNode,
-                    controller: senhaController,
+                    controller: confirmarSenhaController,
                     textInputAction: TextInputAction.next,
                     style: const TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
@@ -114,17 +114,17 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                         if (usuarioController.text.isEmpty) {
                           showCustomSnackBar(context,
                               "Preencha corretamente o campo de usuário");
-                          exit(0);
+                          return;
                         }
                         if (senhaController.text.isEmpty) {
                           showCustomSnackBar(context,
                               "Preencha corretamente o campo de senha");
-                          exit(0);
+                          return;
                         }
                         if (confirmarSenhaController.text.isEmpty) {
                           showCustomSnackBar(context,
                               "Preencha corretamente o campo de confirmar senha");
-                          exit(0);
+                          return;
                         }
                         setState(() {
                           salvando = true;

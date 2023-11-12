@@ -138,12 +138,12 @@ class _LoginPageState extends State<LoginPage> {
                           if (usuarioController.text.isEmpty) {
                             showCustomSnackBar(context,
                                 "Preencha corretamente o campo de usuário");
-                            exit(0);
+                            return;
                           }
                           if (senhaController.text.isEmpty) {
                             showCustomSnackBar(context,
                                 "Preencha corretamente o campo de senha");
-                            exit(0);
+                            return;
                           }
                           setState(() {
                             salvando = true;
