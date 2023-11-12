@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:app_cadastro/model/user_model.dart';
+import 'package:app_cadastro/pages/login_page.dart';
 import 'package:app_cadastro/repositories/user_repository.dart';
 import 'package:app_cadastro/util/functions.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,7 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
   var senhaController = TextEditingController(text: "");
   var confirmarSenhaController = TextEditingController(text: "");
   var senhaFocusNode = FocusNode();
+  var confirmarSenhaFocusNode = FocusNode();
   late UserRepository userRepository;
   late User user;
   bool salvando = false;
@@ -32,6 +32,9 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
       } else {
         user.setSenha(senhaController.text);
         userRepository.update(user);
+        showCustomSnackBar(context, "Senha atualizada com sucesso!");
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
       }
     }
   }
@@ -72,23 +75,28 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                     height: 10,
                   ),
                   TextField(
-                    focusNode: senhaFocusNode,
-                    controller: senhaController,
-                    textInputAction: TextInputAction.next,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      contentPadding: EdgeInsets.only(top: 15),
-                      hintText: "Senha",
-                      hintStyle: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                      obscureText: true,
+                      focusNode: senhaFocusNode,
+                      controller: senhaController,
+                      textInputAction: TextInputAction.next,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        contentPadding: EdgeInsets.only(top: 15),
+                        hintText: "Nova senha",
+                        hintStyle: TextStyle(color: Colors.white),
+                      ),
+                      onEditingComplete: () {
+                        FocusScope.of(context)
+                            .requestFocus(confirmarSenhaFocusNode);
+                      }),
                   SizedBox(
                     height: 10,
                   ),
                   TextField(
-                    focusNode: senhaFocusNode,
+                    obscureText: true,
+                    focusNode: confirmarSenhaFocusNode,
                     controller: confirmarSenhaController,
                     textInputAction: TextInputAction.next,
                     style: const TextStyle(color: Colors.white),

@@ -98,7 +98,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ],
                       ),
                     ),
-                    const Divider(),
+                    const Divider(
+                      height: 20,
+                    ),
                     InkWell(
                       onTap: () async {
                         setState(() {
